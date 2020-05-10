@@ -1,5 +1,5 @@
 import paper from 'paper'
-import { Path, Point, Size, Color } from 'paper'
+import { Path, Point, Size, Color, view } from 'paper'
 import Utils, { FrameEvent } from 'Utils'
 
 const setup = () => {
@@ -12,20 +12,19 @@ const setup = () => {
 export const paperGeom = () => {
   setup()
 
-  let center = paper.view.center
-  let r = new Path.Circle(center, 600)
+  let r = new Path.Rectangle(view.bounds)
   r.fillColor = new Color('grey')
 
-  let rectCenter = center.add(new Point(200, 0))
+  let rectCenter = view.center.add(new Point(200, 0))
   let rect = new Path.Rectangle(rectCenter, new Size(50, 50))
   rect.fillColor = new Color('white')
   setEvents(rect)
 
-  Utils.rangeArray(1, 12).forEach(i => {
+  for (let i of Utils.range(1, 12)) {
     let item = <paper.Path.Rectangle>rect.clone()
-    item.rotate((360 / 12) * i, center)
+    item.rotate((360 / 12) * i, view.center)
     setEvents(item)
-  })
+  }
 }
 
 const setEvents = (r: paper.Path.Rectangle) => {
@@ -33,6 +32,6 @@ const setEvents = (r: paper.Path.Rectangle) => {
     r.fillColor = new Color('red')
   }
   r.onFrame = (e: FrameEvent) => {
-    r.rotate(1, paper.view.center)
+    r.rotate(1, view.center)
   }
 }
