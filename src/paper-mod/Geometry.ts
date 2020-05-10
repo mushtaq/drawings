@@ -1,5 +1,5 @@
 import paper from 'paper'
-import { Path, Matrix } from 'paper'
+import { Matrix } from 'paper'
 
 export class Geometry {
   static segment(path: paper.Path, index: number): [paper.Point, paper.Point] {

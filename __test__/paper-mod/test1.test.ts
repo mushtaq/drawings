@@ -1,5 +1,5 @@
 import { Color, Path, Point } from 'paper'
-import { Geometry } from 'Geometry'
+import { Geometry } from 'paper-mod/Geometry'
 
 const pc = require('paper-jsdom-canvas')
 
