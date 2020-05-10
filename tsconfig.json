@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "allowJs": true,
+    "target": "es6",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2015"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "src/*",
+        "__test__/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*",
+    "__test__/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

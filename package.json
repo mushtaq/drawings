@@ -1,0 +1,39 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "npm run lint && webpack-dev-server --mode development --open",
+    "build": "webpack --mode production",
+    "prettier": "prettier --write --config ./.prettierrc './src/**/*.{ts,tsx}'",
+    "lint": "npm run prettier",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsdom": "^16.2.2",
+    "paper": "0.12.4"
+  },
+  "devDependencies": {
+    "paper-jsdom": "^0.12.4",
+    "paper-jsdom-canvas": "^0.12.4",
+    "@testing-library/jest-dom": "^5.3.0",
+    "@types/jest": "^25.1.4",
+    "@types/jsdom": "^16.2.1",
+    "canvas": "^2.6.1",
+    "html-webpack-plugin": "^4.3.0",
+    "jest": "^25.2.4",
+    "jsdom": "^16.2.2",
+    "jsdom-global": "^3.0.2",
+    "prettier": "^2.0.5",
+    "source-map-loader": "^0.2.4",
+    "ts-jest": "^25.3.0",
+    "ts-loader": "^7.0.2",
+    "typescript": "^3.8.3",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
