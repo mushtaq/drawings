@@ -33,5 +33,6 @@ const setEvents = (r: paper.Path.Rectangle) => {
   }
   r.onFrame = (e: FrameEvent) => {
     r.rotate(1, view.center)
+    r.rotate(1, r.position)
   }
 }
