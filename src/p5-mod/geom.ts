@@ -6,6 +6,7 @@ export const geom = (p: p5) => {
 
   p.setup = () => {
     p.createCanvas(600, 600)
+    p.rectMode('center')
   }
 
   p.draw = () => {
@@ -14,12 +15,12 @@ export const geom = (p: p5) => {
       .rotate(p.radians(t))
 
     for (let i of Utils.range(0, 12)) {
-      p.push()
-      p.translate(225, 25)
-      p.rotate(p.radians(t))
-      p.rect(-25, -25, 50, 50)
-      p.pop()
       p.rotate(p.radians(360 / 12))
+      p.push()
+      p.translate(200, 0)
+      p.rotate(p.radians(t))
+      p.rect(0, 0, 50, 50)
+      p.pop()
     }
 
     t += 1
