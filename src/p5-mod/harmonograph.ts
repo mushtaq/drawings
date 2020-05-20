@@ -1,12 +1,15 @@
 import p5 from 'p5'
+import { Element } from 'p5'
 
 export const hGraph = (p: p5) => {
   const width = 600
   const height = 600
+  const slider: Element = p.createSlider(0, 255)
+
   p.setup = () => {
     p.createCanvas(width, height)
     p.noStroke()
-    p.noLoop()
+    // p.noLoop()
   }
 
   p.draw = () => {
@@ -19,7 +22,7 @@ export const hGraph = (p: p5) => {
       t += 0.1
     }
 
-    p.stroke(255, 0, 0)
+    p.stroke(<number>slider.value(), 0, 0)
     p.strokeWeight(0.1)
 
     for (const [i, s] of points.entries()) {
