@@ -1,8 +1,6 @@
 import p5 from 'p5'
 import Utils from 'Utils'
 
-type Complex = [number, number]
-
 export const mandleBrot = (p: p5) => {
   const factor = 2
   const xmin = -factor
@@ -36,8 +34,8 @@ export const mandleBrot = (p: p5) => {
         if (count % 40000 == 0) {
           console.log(x, y)
         }
-        const z: Complex = [x, y]
-        const col = mandelbrot(z, 100)
+        const z: Complex = new Complex(x, y)
+        const col = z.mandelbrot(100, factor)
         if (col == 100) {
           p.fill(0)
         } else {
@@ -47,29 +45,37 @@ export const mandleBrot = (p: p5) => {
       }
     }
   }
+}
 
-  const mandelbrot = (z: Complex, num: number) => {
+class Complex {
+  constructor(readonly re: number, readonly im: number) {
+  }
+
+  add(that: Complex): Complex {
+    return new Complex(this.re + that.re, this.im + that.im)
+  }
+
+  multiply(that: Complex): Complex {
+    return new Complex(
+      this.re * that.re - this.im * that.im,
+      this.im * that.re + this.re * that.im,
+    )
+  }
+
+  magnitude(): number {
+    return Math.sqrt(this.re ** 2 + this.im ** 2)
+  }
+
+  mandelbrot(num: number, factor: number): number {
     let count = 0
-    let z1 = z
+    let z: Complex = this
     while (count <= num) {
-      if (magnitude(z1) > factor) {
+      if (z.magnitude() > factor) {
         return count
       }
-      z1 = cAdd(cMult(z1, z1), z)
+      z = z.multiply(z).add(this)
       count += 1
     }
     return num
-  }
-
-  const cAdd = (a: Complex, b: Complex): Complex => {
-    return [a[0] + b[0], a[1] + b[1]]
-  }
-
-  const cMult = (u: Complex, v: Complex): Complex => {
-    return [u[0] * v[0] - u[1] * v[1], u[1] * v[0] + u[0] * v[1]]
-  }
-
-  const magnitude = (z: Complex): number => {
-    return p.sqrt(z[0] ** 2 + z[1] ** 2)
   }
 }
