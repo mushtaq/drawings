@@ -21,6 +21,7 @@ export const mandleBrot = (p: p5) => {
   p.setup = () => {
     p.createCanvas(width, height)
     p.colorMode(p.HSB)
+    p.background('black')
     p.noStroke()
     p.noLoop()
   }
@@ -34,12 +35,13 @@ export const mandleBrot = (p: p5) => {
         if (count % 40000 == 0) {
           console.log(x, y)
         }
-        const z: Complex = new Complex(x, y)
-        const col = z.mandelbrot(100, factor)
+        const z = new Complex(x, y)
+        const c = new Complex(-0.4, 0.6)
+        const col = z.julia(c, 100, factor)
         if (col == 100) {
           p.fill(0)
         } else {
-          p.fill(255 - 25 * col, 255, 255)
+          p.fill(6 * col, 255, 255)
           p.rect(x * xscl, y * yscl, 1, 1)
         }
       }
@@ -48,8 +50,7 @@ export const mandleBrot = (p: p5) => {
 }
 
 class Complex {
-  constructor(readonly re: number, readonly im: number) {
-  }
+  constructor(readonly re: number, readonly im: number) {}
 
   add(that: Complex): Complex {
     return new Complex(this.re + that.re, this.im + that.im)
@@ -67,13 +68,17 @@ class Complex {
   }
 
   mandelbrot(num: number, factor: number): number {
+    return this.julia(this, num, factor)
+  }
+
+  julia(c: Complex, num: number, factor: number): number {
     let count = 0
     let z: Complex = this
     while (count <= num) {
       if (z.magnitude() > factor) {
         return count
       }
-      z = z.multiply(z).add(this)
+      z = z.multiply(z).add(c)
       count += 1
     }
     return num
